@@ -7,6 +7,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const effectRan = useRef(false)
 
+
   useEffect(() => {
     if (effectRan.current === true) {
       return
@@ -23,14 +24,15 @@ function App() {
         }
 
         setStatus('Fetching payment details...')
-        
-        const response = await fetch(`http://localhost:8080/api/get-payment-data?token=${token}`)
-        
+        // prod url https://express-js-on-vercel-amber.vercel.app/
+        const devOrProd = process.env.NODE_ENV === 'production' ? 'https://express-js-on-vercel-amber.vercel.app/' : 'http://localhost:8080'
+        const response = await fetch(`${devOrProd}/api/get-payment-data?token=${token}`)
+
         if (!response.ok) {
           const errorData = await response.json()
           throw new Error(errorData.message || 'Failed to retrieve payment data.')
         }
-        
+
         const data = await response.json()
 
         if (!data.success) {
@@ -38,12 +40,23 @@ function App() {
         }
 
         setStatus('Opening payment widget...')
-        
+
         const wertWidget = new WertWidget({
           ...data.signedData,
           ...data.widgetOptions,
+          listeners: {
+            'payment-status': (data) => {
+              console.log('Payment status:', data);
+            },
+            'close': () => {
+              console.log('Widget closed');
+            },
+            'error': (error) => {
+              console.error('Widget error:', error);
+            }
+          }
         })
-        
+
         wertWidget.open()
 
       } catch (err) {
