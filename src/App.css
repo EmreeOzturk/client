@@ -29,9 +29,9 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  padding: 2.5rem 3rem;
+  padding: 3rem;
   width: 400px;
-  min-height: 220px;
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,17 +39,18 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.status-info h2, .status-error h2 {
-  margin-top: 0;
+.status-info h2, .status-error h2, .status-success h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;
   color: #fff;
 }
 
-.status-info p, .status-error p {
+.status-info p, .status-error p, .status-success p {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .status-error {
@@ -65,57 +66,113 @@ h1 {
 }
 
 .status-success h2 {
-  margin-top: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
   color: #a5d6a7;
 }
 
 .status-success p {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
 }
 
-.status-success p span {
-  font-weight: 500;
-  color: #fff;
-  background-color: rgba(0,0,0,0.2);
-  padding: 4px 8px;
-  border-radius: 6px;
-  display: inline-block;
-  margin-top: 0.5rem;
-  word-break: break-all;
+/* --- New Styles --- */
+
+/* Icons */
+.status-icon {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Pulsing dots loader */
-.spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.spinner > div {
-  width: 12px;
-  height: 12px;
-  background-color: #fff;
-  border-radius: 100%;
-  display: inline-block;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  margin: 0 4px;
-}
-
-.spinner .bounce1 {
-  animation-delay: -0.32s;
-}
-
-.spinner .bounce2 {
-  animation-delay: -0.16s;
-}
-
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
-    transform: scale(0);
-  } 40% { 
-    transform: scale(1.0);
+/* Loading Icon Animation */
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
   }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.spinner-icon path {
+  transform-origin: center;
+  animation: spin 1.2s linear infinite;
+}
+
+/* Success Icon Animation */
+.success-icon .circle {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: draw-circle 0.5s ease-out forwards;
+}
+.success-icon .checkmark {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: draw-checkmark 0.4s 0.5s ease-out forwards;
+}
+
+@keyframes draw-circle {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes draw-checkmark {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Error Icon Animation */
+.error-icon .circle {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: draw-circle 0.5s ease-out forwards;
+}
+.error-icon .cross-1, .error-icon .cross-2 {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: draw-cross 0.3s 0.5s ease-out forwards;
+}
+
+@keyframes draw-cross {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Transaction Info */
+.tx-info {
+  margin-top: 1rem;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: left;
+}
+.tx-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.tx-info span {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: #fff;
+  word-break: break-all;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Return Button */
+.btn-return {
+  margin-top: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-return:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
