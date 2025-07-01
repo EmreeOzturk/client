@@ -5,6 +5,8 @@ import './App.css'
 function App() {
   const [status, setStatus] = useState<string>('Initializing payment...')
   const [error, setError] = useState<string | null>(null)
+  const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false)
+  const [txId, setTxId] = useState<string | null>(null)
   const effectRan = useRef(false)
 
 
@@ -47,6 +49,13 @@ function App() {
           listeners: {
             'payment-status': (data) => {
               console.log('Payment status:', data);
+              if (data.status === 'success') {
+                setStatus('Payment successful!');
+                setIsPaymentSuccessful(true);
+                setTxId(data.tx_id ?? null);
+              } else if (data.status === 'pending') {
+                setStatus('Payment processing...');
+              }
             },
             'close': () => {
               console.log('Widget closed');
@@ -78,6 +87,16 @@ function App() {
           <div className="status-error">
             <h2>Something went wrong</h2>
             <p>{error}</p>
+          </div>
+        ) : isPaymentSuccessful ? (
+          <div className="status-success">
+            <h2>Payment Successful</h2>
+            <p>Your transaction has been completed.</p>
+            {txId && (
+              <p>
+                Transaction ID: <span>{txId}</span>
+              </p>
+            )}
           </div>
         ) : (
           <div className="status-info">
