@@ -26,7 +26,7 @@ const LoadingIcon = () => (
 
 
 function App() {
-  const [status, setStatus] = useState<string>('Ödeme başlatılıyor...')
+  const [status, setStatus] = useState<string>('Initializing payment...')
   const [error, setError] = useState<string | null>(null)
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false)
   const [txId, setTxId] = useState<string | null>(null)
@@ -45,26 +45,26 @@ function App() {
         const token = queryParams.get('token')
 
         if (!token) {
-          throw new Error('Geçersiz ödeme linki. Lütfen ödemeyi tekrar başlatın.')
+          throw new Error('Invalid payment link. Please initiate the payment again.')
         }
 
-        setStatus('Ödeme detayları alınıyor...')
+        setStatus('Fetching payment details...')
         // prod url https://express-js-on-vercel-amber.vercel.app/
         const devOrProd = process.env.NODE_ENV === 'production' ? 'https://express-js-on-vercel-amber.vercel.app' : 'http://localhost:3000'
         const response = await fetch(`${devOrProd}/api/get-payment-data?token=${token}`)
 
         if (!response.ok) {
           const errorData = await response.json()
-          throw new Error(errorData.message || 'Ödeme verileri alınamadı.')
+          throw new Error(errorData.message || 'Failed to retrieve payment data.')
         }
 
         const data = await response.json()
 
         if (!data.success) {
-          throw new Error(data.message || 'Backend ödeme verilerini sağlayamadı.')
+          throw new Error(data.message || 'Backend failed to provide payment data.')
         }
 
-        setStatus('Ödeme arayüzü açılıyor...')
+        setStatus('Opening payment widget...')
 
         const wertWidget = new WertWidget({
           ...data.signedData,
@@ -73,11 +73,11 @@ function App() {
             'payment-status': (data) => {
               console.log('Payment status:', data);
               if (data.status === 'success') {
-                setStatus('Ödeme başarılı!');
+                setStatus('Payment successful!');
                 setIsPaymentSuccessful(true);
                 setTxId(data.tx_id ?? null);
               } else if (data.status === 'pending') {
-                setStatus('Ödeme işleniyor...');
+                setStatus('Payment processing...');
               }
             },
             'close': () => {
@@ -92,10 +92,10 @@ function App() {
         wertWidget.open()
 
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Bilinmeyen bir hata oluştu.'
+        const message = err instanceof Error ? err.message : 'An unknown error occurred.'
         console.error('Initialization failed:', message)
         setError(message)
-        setStatus('Başarısız')
+        setStatus('Failed')
       }
     }
 
@@ -104,23 +104,23 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Ödeme Ekranı</h1>
+      <h1>Payment Gateway</h1>
       <div className="status-card">
         {error ? (
           <div className="status-error">
             <ErrorIcon />
-            <h2>Bir şeyler ters gitti</h2>
+            <h2>Something went wrong</h2>
             <p>{error}</p>
-            <button className="btn-return" onClick={() => console.log('Return home')}>Ana Sayfaya Dön</button>
+            <button className="btn-return" onClick={() => console.log('Return home')}>Return to Home</button>
           </div>
         ) : isPaymentSuccessful ? (
           <div className="status-success">
             <SuccessIcon />
-            <h2>Ödeme Başarılı</h2>
-            <p>İşleminiz başarıyla tamamlandı.</p>
+            <h2>Payment Successful</h2>
+            <p>Your transaction has been completed.</p>
             {txId && (
               <div className="tx-info">
-                <p>İşlem Kodu:</p>
+                <p>Transaction ID:</p>
                 <span>{txId}</span>
               </div>
             )}
@@ -128,7 +128,7 @@ function App() {
         ) : (
           <div className="status-info">
             <LoadingIcon />
-            <h2>Oturumunuz Güvenle Hazırlanıyor</h2>
+            <h2>Securing your session...</h2>
             <p>{status}</p>
           </div>
         )}
