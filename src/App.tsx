@@ -4,23 +4,30 @@ import './App.css'
 
 const ErrorIcon = () => (
   <svg className="status-icon error-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle className="circle" cx="40" cy="40" r="38" stroke="#ff8a80" strokeWidth="4"/>
-    <path className="cross-1" d="M25 25L55 55" stroke="#ff8a80" strokeWidth="4" strokeLinecap="round"/>
-    <path className="cross-2" d="M55 25L25 55" stroke="#ff8a80" strokeWidth="4" strokeLinecap="round"/>
+    <circle className="circle" cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="3" fill="none"/>
+    <path className="cross-1" d="M28 28L52 52" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+    <path className="cross-2" d="M52 28L28 52" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
   </svg>
 );
 
 const SuccessIcon = () => (
   <svg className="status-icon success-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle className="circle" cx="40" cy="40" r="38" stroke="#a5d6a7" strokeWidth="4"/>
-    <path className="checkmark" d="M24 41.5L36.5 54L58 32.5" stroke="#a5d6a7" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle className="circle" cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="3" fill="none"/>
+    <path className="checkmark" d="M25 40L35 50L55 30" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
 const LoadingIcon = () => (
   <svg className="status-icon spinner-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="40" cy="40" r="38" stroke="rgba(255,255,255,0.3)" strokeWidth="4"/>
-    <path d="M40 2C19.027 2 2 19.027 2 40" stroke="#fff" strokeWidth="4" strokeLinecap="round"/>
+    <circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.2)" strokeWidth="3" fill="none"/>
+    <path d="M40 4C20.118 4 4 20.118 4 40" stroke="url(#gradient)" strokeWidth="3" strokeLinecap="round"/>
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6366f1" />
+        <stop offset="50%" stopColor="#8b5cf6" />
+        <stop offset="100%" stopColor="#ec4899" />
+      </linearGradient>
+    </defs>
   </svg>
 );
 
