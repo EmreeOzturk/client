@@ -208,84 +208,42 @@ body::before {
 
 /* Transaction Info */
 .tx-info {
-  margin-top: 1.5rem;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 12px;
-  padding: 1.25rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #1f2937; /* Darker inner background */
+  border-radius: 8px;
   width: 100%;
-  max-width: 380px;
-  transition: all 0.3s ease;
-}
-
-.tx-info:hover {
-  background: rgba(15, 23, 42, 0.8);
-  border-color: rgba(148, 163, 184, 0.2);
 }
 
 .tx-info p {
-  margin: 0;
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.8rem;
+  color: #6b7280;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   font-weight: 600;
 }
 
 .tx-info span {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.875rem;
-  color: var(--text-primary);
+  color: #e5e7eb;
+  font-family: 'Courier New', Courier, monospace;
   word-break: break-all;
-  display: block;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  font-weight: 500;
 }
 
 /* Return Button */
 .btn-return {
   margin-top: 2rem;
-  background: var(--primary-gradient);
-  border: none;
+  background-color: #4f46e5;
   color: white;
-  padding: 14px 32px;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  letter-spacing: -0.01em;
-}
-
-.btn-return::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 .btn-return:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-}
-
-.btn-return:hover::before {
-  transform: translateX(0);
-}
-
-.btn-return:active {
-  transform: translateY(0);
+  background-color: #6366f1;
 }
 
 /* Responsive Design */
