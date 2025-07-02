@@ -168,6 +168,27 @@ const OrderTable = ({ orders }: OrderTableProps) => {
     return sortDirection === 'asc' ? '↑' : '↓';
   };
 
+  const exportToCSV = () => {
+    const headers = ['Date', 'User Email', 'Status', 'Amount', 'Currency', 'Wert Order ID'];
+    const rows = filteredAndSortedOrders.map(order => [
+      `"${formatDate(order.createdAt)}"`,
+      `"${order.user?.email || 'N/A'}"`,
+      `"${order.status}"`,
+      order.currencyAmount.toFixed(2),
+      `"${order.currency}"`,
+      `"${order.wertOrderId}"`
+    ].join(',')).join('\n');
+
+    const csvContent = "data:text/csv;charset=utf-8," + headers.join(',') + '\n' + rows;
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "orders.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (orders.length === 0) {
     return <EmptyState message="No orders found." />;
   }
@@ -281,6 +302,9 @@ const OrderTable = ({ orders }: OrderTableProps) => {
               </button>
             )}
           </div>
+          <button onClick={exportToCSV} className="export-csv-btn">
+            Export to CSV
+          </button>
         </div>
       </div>
 
@@ -341,4 +365,4 @@ const OrderTable = ({ orders }: OrderTableProps) => {
   );
 };
 
-export default OrderTable; 
+export default OrderTable;
