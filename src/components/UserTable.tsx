@@ -5,9 +5,10 @@ import EmptyState from './EmptyState';
 type UserTableProps = {
   users: User[];
   onBlacklist: (userId: string) => void;
+  onRemoveFromBlacklist: (userId: string) => void;
 };
 
-const UserTable = ({ users, onBlacklist }: UserTableProps) => {
+const UserTable = ({ users, onBlacklist, onRemoveFromBlacklist }: UserTableProps) => {
   if (users.length === 0) {
     return <EmptyState message="No users found." />;
   }
@@ -34,7 +35,14 @@ const UserTable = ({ users, onBlacklist }: UserTableProps) => {
                 </span>
               </td>
               <td>
-                {!user.isBlacklisted && (
+                {user.isBlacklisted ? (
+                  <button 
+                    onClick={() => onRemoveFromBlacklist(user.id)} 
+                    className="btn-remove-blacklist"
+                  >
+                    Remove from Blacklist
+                  </button>
+                ) : (
                   <button 
                     onClick={() => onBlacklist(user.id)} 
                     className="btn-blacklist"

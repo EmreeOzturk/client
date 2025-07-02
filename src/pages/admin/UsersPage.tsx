@@ -89,6 +89,37 @@ const UsersPage = () => {
     }
   };
 
+  const handleRemoveFromBlacklist = async (userId: string) => {
+    const token = localStorage.getItem('authToken');
+    
+    // Optimistically update the UI
+    setUsers(users => users.map(user => 
+      user.id === userId ? { ...user, isBlacklisted: false } : user
+    ));
+
+    try {
+      const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/users/unblacklist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to remove user from blacklist');
+      }
+    } catch (err) {
+      // Revert the UI on failure
+      setUsers(users => users.map(user => 
+        user.id === userId ? { ...user, isBlacklisted: true } : user
+      ));
+      const message = err instanceof Error ? err.message : 'An unknown error occurred.';
+      setError(message);
+    }
+  };
+
   return (
     <div className="users-page">
       <h1>Manage Users</h1>
@@ -96,7 +127,11 @@ const UsersPage = () => {
       {isLoading && <Spinner />}
       {error && <p className="error-message">{error}</p>}
       {!isLoading && !error && (
-        <UserTable users={users} onBlacklist={handleBlacklistClick} />
+        <UserTable 
+          users={users} 
+          onBlacklist={handleBlacklistClick}
+          onRemoveFromBlacklist={handleRemoveFromBlacklist}
+        />
       )}
       <ConfirmationModal
         isOpen={isModalOpen}
