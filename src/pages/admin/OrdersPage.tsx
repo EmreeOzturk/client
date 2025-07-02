@@ -43,7 +43,13 @@ const OrdersPage = () => {
 
   return (
     <div className="orders-page">
-      <h1>View Orders</h1>
+      <div className="page-header">
+        <h1>Orders Management</h1>
+        <p className="page-description">
+          Monitor and manage all payment orders. Track transaction statuses, amounts, and user details.
+        </p>
+      </div>
+
       {isLoading && <Spinner />}
       {error && <p className="error-message">{error}</p>}
       {!isLoading && !error && <OrderTable orders={orders} />}

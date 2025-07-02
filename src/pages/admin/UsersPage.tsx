@@ -122,7 +122,13 @@ const UsersPage = () => {
 
   return (
     <div className="users-page">
-      <h1>Manage Users</h1>
+      <div className="page-header">
+        <h1>Users Management</h1>
+        <p className="page-description">
+          Manage user accounts and access control. Monitor user activity and handle blacklist operations.
+        </p>
+      </div>
+
       {isLoading && <Spinner />}
       {error && <p className="error-message">{error}</p>}
       {!isLoading && !error && (

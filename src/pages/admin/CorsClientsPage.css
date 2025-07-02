@@ -75,6 +75,8 @@
   color: #374151;
   background-color: white;
   transition: all 0.2s ease-in-out;
+  position: relative;
+  z-index: 3;
 }
 
 .domain-input:focus {
@@ -112,6 +114,8 @@
   align-items: center;
   gap: 0.5rem;
   min-height: 48px;
+  position: relative;
+  z-index: 3;
 }
 
 .btn-add-client:hover:not(:disabled) {
@@ -232,6 +236,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 3;
 }
 
 .btn-delete:hover {
