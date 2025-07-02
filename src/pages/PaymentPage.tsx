@@ -32,7 +32,7 @@ const LoadingIcon = () => (
 );
 
 
-function App() {
+function PaymentPage() {
   const [status, setStatus] = useState<string>('Initializing payment...')
   const [error, setError] = useState<string | null>(null)
   const [isPaymentSuccessful, setIsPaymentSuccessful] = useState(false)
@@ -144,4 +144,4 @@ function App() {
   )
 }
 
-export default App
+export default PaymentPage
