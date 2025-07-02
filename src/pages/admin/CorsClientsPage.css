@@ -100,6 +100,16 @@
   margin-top: 0.25rem;
 }
 
+.cors-clients-page .error-message {
+  color: #ef4444;
+  font-size: 0.8rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ef4444;
+  background-color: #fed7d7;
+  margin: 1rem 0;
+}
+
 .btn-add-client {
   background-color: #10b981;
   color: white;
@@ -292,13 +302,21 @@
 }
 
 @media (max-width: 480px) {
+  .cors-clients-page {
+    padding: 0.75rem;
+  }
+
   .add-client-section,
   .clients-section {
     padding: 1rem;
   }
 
   .page-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .page-description {
+    font-size: 0.9rem;
   }
 
   .add-client-section h2,

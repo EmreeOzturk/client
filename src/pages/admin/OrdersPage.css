@@ -1,9 +1,9 @@
 .orders-page {
-  position: relative;
-  width: 100%;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Page Header */
@@ -28,20 +28,38 @@
 }
 
 .orders-page .error-message {
-  color: #c53030;
+  color: #ef4444;
+  font-size: 0.8rem;
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid #c53030;
-  margin-top: 1rem;
+  border: 1px solid #ef4444;
+  background-color: #fed7d7;
+  margin: 1rem 0;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .orders-page {
     padding: 1rem;
+    position: relative;
+    z-index: 1;
   }
 
   .page-header h1 {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-page {
+    padding: 0.75rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .page-description {
+    font-size: 0.9rem;
   }
 }
