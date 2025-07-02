@@ -21,6 +21,9 @@ const Sidebar = () => {
         <NavLink to="/admin/dashboard/orders" className="nav-link">
           Orders
         </NavLink>
+        <NavLink to="/admin/dashboard/cors-clients" className="nav-link">
+          CORS Clients
+        </NavLink>
       </nav>
       <div className="sidebar-footer">
         <button onClick={handleLogout} className="btn-logout">

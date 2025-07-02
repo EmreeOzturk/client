@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './pages/admin/DashboardLayout';
 import UsersPage from './pages/admin/UsersPage';
 import OrdersPage from './pages/admin/OrdersPage';
+import CorsClientsPage from './pages/admin/CorsClientsPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route index element={<Navigate to="users" replace />} />
           <Route path="users" element={<UsersPage />} />
           <Route path="orders" element={<OrdersPage />} />
+          <Route path="cors-clients" element={<CorsClientsPage />} />
         </Route>
 
         <Route path="/" element={<PaymentPage />} />
