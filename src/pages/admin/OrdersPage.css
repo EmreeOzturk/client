@@ -27,6 +27,23 @@
   line-height: 1.5;
 }
 
+/* Orders Content Section */
+.orders-content-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.orders-content-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1.5rem 0;
+}
+
 .orders-page .error-message {
   color: #ef4444;
   font-size: 0.8rem;
@@ -55,11 +72,19 @@
     padding: 0.75rem;
   }
 
+  .orders-content-section {
+    padding: 1rem;
+  }
+
   .page-header h1 {
     font-size: 1.25rem;
   }
 
   .page-description {
     font-size: 0.9rem;
+  }
+
+  .orders-content-section h2 {
+    font-size: 1.25rem;
   }
 }

@@ -50,9 +50,14 @@ const OrdersPage = () => {
         </p>
       </div>
 
-      {isLoading && <Spinner />}
-      {error && <p className="error-message">{error}</p>}
-      {!isLoading && !error && <OrderTable orders={orders} />}
+      {/* Orders Content Section */}
+      <div className="orders-content-section">
+        <h2>All Orders ({orders.length})</h2>
+        
+        {isLoading && <Spinner />}
+        {error && <p className="error-message">{error}</p>}
+        {!isLoading && !error && <OrderTable orders={orders} />}
+      </div>
     </div>
   );
 };

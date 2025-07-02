@@ -32,7 +32,7 @@ const UsersPage = () => {
         }
 
         const data = await response.json();
-        setUsers(data.users); // Assuming the API returns { users: [...] }
+        setUsers(data.users);
       } catch (err) {
         const message = err instanceof Error ? err.message : 'An unknown error occurred.';
         setError(message);
@@ -129,15 +129,21 @@ const UsersPage = () => {
         </p>
       </div>
 
-      {isLoading && <Spinner />}
-      {error && <p className="error-message">{error}</p>}
-      {!isLoading && !error && (
-        <UserTable 
-          users={users} 
-          onBlacklist={handleBlacklistClick}
-          onRemoveFromBlacklist={handleRemoveFromBlacklist}
-        />
-      )}
+      {/* Users Content Section */}
+      <div className="users-content-section">
+        <h2>All Users ({users.length})</h2>
+        
+        {isLoading && <Spinner />}
+        {error && <p className="error-message">{error}</p>}
+        {!isLoading && !error && (
+          <UserTable 
+            users={users} 
+            onBlacklist={handleBlacklistClick}
+            onRemoveFromBlacklist={handleRemoveFromBlacklist}
+          />
+        )}
+      </div>
+
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
