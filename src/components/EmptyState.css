@@ -1,0 +1,12 @@
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.empty-state p {
+  color: #718096;
+  font-size: 1.125rem;
+} 

@@ -1,0 +1,71 @@
+.table-container {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.order-table th,
+.order-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-table th {
+  background-color: #f7fafc;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4a5568;
+}
+
+.order-table td {
+  color: #2d3748;
+}
+
+/* Status styles */
+.status {
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-completed, .status-success {
+  background-color: #e6fffa;
+  color: #38a169;
+}
+
+.status-pending {
+  background-color: #feebc8;
+  color: #9c4221;
+}
+
+.status-failed, .status-canceled {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+
+/* Action button styles */
+.btn-details {
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-details:hover {
+  background-color: #2b6cb0;
+} 
