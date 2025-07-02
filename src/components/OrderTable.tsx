@@ -29,7 +29,7 @@ const OrderTable = ({ orders }: OrderTableProps) => {
             <th>Status</th>
             <th>Amount</th>
             <th>Wert Order ID</th>
-            <th>Actions</th>
+            {/* <th>Actions</th> */}
           </tr>
         </thead>
         <tbody>
@@ -44,9 +44,9 @@ const OrderTable = ({ orders }: OrderTableProps) => {
               </td>
               <td>${order.currencyAmount.toFixed(2)} {order.currency}</td>
               <td>{order.wertOrderId}</td>
-              <td>
+              {/* <td>
                 <button className="btn-details">View Details</button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
