@@ -123,7 +123,6 @@ const UsersPage = () => {
   return (
     <div className="users-page">
       <h1>Manage Users</h1>
-      <p>Here you can view, search, and blacklist users.</p>
       {isLoading && <Spinner />}
       {error && <p className="error-message">{error}</p>}
       {!isLoading && !error && (
