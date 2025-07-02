@@ -1,9 +1,9 @@
-.users-page {
+.orders-page {
   position: relative;
   width: 100%;
 }
 
-.users-page .error-message {
+.orders-page .error-message {
   color: #c53030;
   background-color: #fed7d7;
   padding: 1rem;

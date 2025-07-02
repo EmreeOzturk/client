@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Order } from '../../types';
 import OrderTable from '../../components/OrderTable';
 import Spinner from '../../components/Spinner';
+import './OrdersPage.css';
 // We can create a dedicated CSS file if needed later
 // import './OrdersPage.css'; 
 
