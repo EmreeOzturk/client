@@ -56,8 +56,8 @@ function App() {
         }
 
         setStatus('Fetching payment details...')
-        // prod url https://express-js-on-vercel-amber.vercel.app/
-        const devOrProd = process.env.NODE_ENV === 'production' ? 'https://express-js-on-vercel-amber.vercel.app' : 'http://localhost:3000'
+        // prod url https://payment-gateway-dats.vercel.app/
+        const devOrProd = process.env.NODE_ENV === 'production' ? 'https://payment-gateway-dats.vercel.app' : 'http://localhost:3000'
         const response = await fetch(`${devOrProd}/api/get-payment-data?token=${token}`)
 
         if (!response.ok) {
