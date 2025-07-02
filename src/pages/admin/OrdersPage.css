@@ -5,9 +5,12 @@
 
 .orders-page .error-message {
   color: #c53030;
-  background-color: #fed7d7;
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid #c53030;
   margin-top: 1rem;
 } 
+
+.orders-page h1 {
+  color: #1a202c;
+}
