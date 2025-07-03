@@ -69,6 +69,30 @@ body::before {
   text-align: center;
 }
 
+.company-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: rgba(30, 41, 59, 0.3);
+  border-radius: 8px;
+}
+
+.company-logo {
+  width: 150px;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 1rem;
+}
+
+.company-info p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0.2rem 0;
+}
+
 .container h1 {
   margin-bottom: 2rem;
   font-size: 2rem;

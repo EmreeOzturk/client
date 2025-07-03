@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import WertWidget from '@wert-io/widget-initializer'
 import './PaymentPage.css'
+import Artboard6 from '.././../public/Artboard 6.png' // Adjust path as needed
 
 const ErrorIcon = () => (
   <svg className="status-icon error-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,6 +113,11 @@ function PaymentPage() {
   return (
     <div className="container">
       <h1>Payment Gateway</h1>
+      <div className="company-info">
+        <img src={Artboard6} alt="DLT Payments Logo" className="company-logo" />
+        <p> DLT TECH LTD</p>
+        <p>Tirana, Tirana '' Brigada 8 '' Street , Building No:19 Entrance No: 3</p>
+      </div>
       <div className="status-card">
         {error ? (
           <div className="status-error">
