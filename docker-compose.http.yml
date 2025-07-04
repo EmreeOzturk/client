@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   # MongoDB Database
   mongodb:
@@ -9,7 +11,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
     ports:
-      - "127.0.0.1:27017:27017"  # Sadece localhost'tan erişim
+      - "127.0.0.1:27017:27017"
     volumes:
       - mongodb_data:/data/db
       - ./mongodb.key:/etc/mongodb/mongodb.key:ro
@@ -29,7 +31,7 @@ services:
       - DATABASE_URL=mongodb://admin:${MONGODB_PASSWORD}@mongodb:27017/wert_app?authSource=admin&directConnection=true
       - PORT=3001
       - JWT_SECRET=${JWT_SECRET}
-      - CORS_ORIGIN=https://${DOMAIN_NAME}
+      - CORS_ORIGIN=http://${DOMAIN_NAME}
     expose:
       - "3001"
     depends_on:
@@ -54,35 +56,23 @@ services:
       - app-network
     environment:
       - REACT_APP_API_URL=/api
-      - REACT_APP_BASE_URL=https://${DOMAIN_NAME}
+      - REACT_APP_BASE_URL=http://${DOMAIN_NAME}
 
-  # Nginx Reverse Proxy with SSL
+  # Nginx HTTP-only (SSL sertifikası için)
   nginx:
     image: nginx:alpine
     container_name: nginx-proxy
     restart: always
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - ./nginx-ssl.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./nginx-http.conf:/etc/nginx/conf.d/default.conf:ro
       - ./certbot/www:/var/www/certbot:ro
     depends_on:
       - client
       - api
     networks:
       - app-network
-
-  # Let's Encrypt Certbot
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    restart: "no"
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt:rw
-      - ./certbot/www:/var/www/certbot:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot --email ${EMAIL} --agree-tos --no-eff-email -d ${DOMAIN_NAME}
 
   # MongoDB Replica Set Initialization
   mongo-init:
