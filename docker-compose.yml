@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:8.0.11
+    command: mongod --replSet rs0 --bind_ip_all --keyFile /etc/mongodb/mongodb.key
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Xz0k37ZxLrwh_K-i1RjZ9
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongodb.key:/etc/mongodb/mongodb.key:ro
+    user: "999:999"
+    networks:
+      - app-network
+
+  # Express API Backend
+  api:
+    build:
+      context: ./express-js-on-vercel
+      dockerfile: Dockerfile
+    container_name: express-api
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=mongodb://admin:Xz0k37ZxLrwh_K-i1RjZ9@mongodb:27017/wert_app?authSource=admin&directConnection=true
+      - PORT=3001
+      - JWT_SECRET=923K8409c238n4059382n90n382n140938n4902138n4901324
+      - CORS_ORIGIN=http://localhost:3000
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+    volumes:
+      - ./express-js-on-vercel/.env:/app/.env:ro
+
+  # React Frontend
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: react-client
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001
+      - REACT_APP_BASE_URL=http://localhost:3000
+
+  # MongoDB Replica Set Initialization
+  mongo-init:
+    image: mongo:8.0.11
+    container_name: mongo-init
+    restart: "no"
+    depends_on:
+      - mongodb
+    command: >
+      bash -c "
+        sleep 10 &&
+        mongosh --host mongodb:27017 -u admin -p Xz0k37ZxLrwh_K-i1RjZ9 --authenticationDatabase admin --eval '
+          rs.initiate({
+            _id: \"rs0\",
+            members: [
+              { _id: 0, host: \"mongodb:27017\" }
+            ]
+          });
+        ' &&
+        echo 'MongoDB replica set initialized'
+      "
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge 

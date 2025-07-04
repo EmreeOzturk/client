@@ -1,69 +1,149 @@
-# React + TypeScript + Vite
+# Wert App - Docker Compose Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje React frontend, Express API backend ve MongoDB database'ini Docker Compose ile birleştirir.
 
-Currently, two official plugins are available:
+## 🚀 Hızlı Başlangıç
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Gereksinimler
+- Docker
+- Docker Compose
 
-## Expanding the ESLint configuration
+### Kurulum
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Repository'yi klonlayın:**
+```bash
+git clone <your-repo-url>
+cd <your-repo-directory>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Environment dosyasını oluşturun:**
+```bash
+cp express-js-on-vercel/env.example express-js-on-vercel/.env
 ```
+
+3. **Environment değişkenlerini düzenleyin:**
+```bash
+# express-js-on-vercel/.env dosyasını düzenleyin
+# Özellikle JWT_SECRET ve Wert.io anahtarlarını değiştirin
+```
+
+4. **Uygulamayı başlatın:**
+```bash
+docker-compose up -d
+```
+
+5. **Uygulamaya erişin:**
+- Frontend: http://localhost:3000
+- API: http://localhost:3001
+- MongoDB: localhost:27017
+
+## 📁 Proje Yapısı
+
+```
+.
+├── client/                 # React Frontend
+├── express-js-on-vercel/   # Express API Backend
+├── docker-compose.yml      # Docker Compose konfigürasyonu
+├── mongodb.key            # MongoDB authentication key
+└── README.md              # Bu dosya
+```
+
+## 🔧 Servisler
+
+### 1. MongoDB (Port: 27017)
+- MongoDB 8.0.11
+- Replica set konfigürasyonu
+- Authentication aktif
+- Persistent volume
+
+### 2. Express API (Port: 3001)
+- Node.js 20
+- Prisma ORM
+- JWT authentication
+- CORS konfigürasyonu
+
+### 3. React Client (Port: 3000)
+- Vite build
+- Nginx serving
+- Production optimized
+
+## 🛠️ Komutlar
+
+### Uygulamayı başlatma
+```bash
+docker-compose up -d
+```
+
+### Logları görüntüleme
+```bash
+docker-compose logs -f
+```
+
+### Belirli servisin logları
+```bash
+docker-compose logs -f api
+docker-compose logs -f client
+docker-compose logs -f mongodb
+```
+
+### Uygulamayı durdurma
+```bash
+docker-compose down
+```
+
+### Veritabanını sıfırlama
+```bash
+docker-compose down -v
+docker-compose up -d
+```
+
+### Servisleri yeniden başlatma
+```bash
+docker-compose restart
+```
+
+## 🔒 Güvenlik
+
+### MongoDB
+- Authentication aktif
+- Replica set konfigürasyonu
+- Key file authentication
+
+### Environment Variables
+- JWT_SECRET değiştirin
+- Wert.io anahtarlarını ekleyin
+- Production'da güçlü şifreler kullanın
+
+## 🐛 Sorun Giderme
+
+### MongoDB bağlantı sorunu
+```bash
+# MongoDB container'ına bağlanın
+docker-compose exec mongodb mongosh -u admin -p Xz0k37ZxLrwh_K-i1RjZ9 --authenticationDatabase admin
+```
+
+### API loglarını kontrol edin
+```bash
+docker-compose logs api
+```
+
+### Prisma migration
+```bash
+docker-compose exec api npx prisma db push
+```
+
+## 📝 Notlar
+
+- İlk çalıştırmada MongoDB replica set'inin başlatılması 10-15 saniye sürebilir
+- API servisi MongoDB'nin hazır olmasını bekler
+- Frontend API'ye bağlanmak için API servisinin hazır olmasını bekler
+
+## 🔄 Production Deployment
+
+Production'a geçerken:
+1. Environment değişkenlerini güncelleyin
+2. JWT_SECRET'ı değiştirin
+3. Wert.io anahtarlarını ekleyin
+4. MongoDB şifresini değiştirin
+5. SSL sertifikaları ekleyin
+6. Reverse proxy konfigürasyonu yapın
