@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminLoginPage.css';
+import { BACKEND_URL } from '../constants';
 
 const AdminLoginPage = () => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const AdminLoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/login', {
+      const response = await fetch(`${BACKEND_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

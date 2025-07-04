@@ -3,6 +3,7 @@ import type { Order } from '../../types';
 import OrderTable from '../../components/OrderTable';
 import Spinner from '../../components/Spinner';
 import './OrdersPage.css';
+import { BACKEND_URL } from '../../constants';
 // We can create a dedicated CSS file if needed later
 // import './OrdersPage.css'; 
 
@@ -18,7 +19,7 @@ const OrdersPage = () => {
       const token = localStorage.getItem('authToken');
 
       try {
-        const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/orders', {
+        const response = await fetch(`${BACKEND_URL}/api/admin/orders`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

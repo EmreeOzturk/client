@@ -4,6 +4,7 @@ import UserTable from '../../components/UserTable';
 import Spinner from '../../components/Spinner';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import './UsersPage.css';
+import { BACKEND_URL } from '../../constants';
 
 const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -21,7 +22,7 @@ const UsersPage = () => {
       const token = localStorage.getItem('authToken');
 
       try {
-        const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/users', {
+        const response = await fetch(`${BACKEND_URL}/api/admin/users`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -65,7 +66,7 @@ const UsersPage = () => {
     setIsModalOpen(false);
 
     try {
-      const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/users/blacklist', {
+      const response = await fetch(`${BACKEND_URL}/api/admin/users/blacklist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ const UsersPage = () => {
     ));
 
     try {
-      const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/users/unblacklist', {
+      const response = await fetch(`${BACKEND_URL}/api/admin/users/unblacklist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

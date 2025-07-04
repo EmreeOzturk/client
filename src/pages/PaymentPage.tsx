@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import WertWidget from '@wert-io/widget-initializer'
 import './PaymentPage.css'
 import Artboard6 from '.././../public/Artboard 6.png' // Adjust path as needed
+import { BACKEND_URL } from '../constants';
 
 const ErrorIcon = () => (
   <svg className="status-icon error-icon" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +59,7 @@ function PaymentPage() {
 
         setStatus('Fetching payment details...')
         // prod url https://payment-gateway-dats.vercel.app/
-        const devOrProd = process.env.NODE_ENV === 'production' ? 'https://payment-gateway-dats.vercel.app' : 'http://localhost:3000'
+        const devOrProd = process.env.NODE_ENV === 'production' ? BACKEND_URL: 'http://localhost:3000'
         const response = await fetch(`${devOrProd}/api/get-payment-data?token=${token}`)
 
         if (!response.ok) {

@@ -3,6 +3,7 @@ import Spinner from '../../components/Spinner';
 import EmptyState from '../../components/EmptyState';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import './CorsClientsPage.css';
+import { BACKEND_URL } from '../../constants';
 
 interface CorsClient {
     id: string;
@@ -30,7 +31,7 @@ const CorsClientsPage = () => {
         const token = localStorage.getItem('authToken');
 
         try {
-            const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/cors-clients', {
+            const response = await fetch(`${BACKEND_URL}/api/admin/cors-clients`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -84,7 +85,7 @@ const CorsClientsPage = () => {
         const token = localStorage.getItem('authToken');
 
         try {
-            const response = await fetch('https://payment-gateway-dats.vercel.app/api/admin/cors-clients', {
+            const response = await fetch(`${BACKEND_URL}/api/admin/cors-clients`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -113,7 +114,7 @@ const CorsClientsPage = () => {
         const token = localStorage.getItem('authToken');
 
         try {
-            const response = await fetch(`https://payment-gateway-dats.vercel.app/api/admin/cors-clients/${client.id}`, {
+            const response = await fetch(`${BACKEND_URL}/api/admin/cors-clients/${client.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

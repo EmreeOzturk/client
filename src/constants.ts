@@ -1,0 +1,1 @@
+export const BACKEND_URL="https://payment-gateway-dats.vercel.app"
