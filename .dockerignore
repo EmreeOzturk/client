@@ -95,9 +95,9 @@ eslint.config.js
 .prettierrc*
 prettier.config.js
 
-# TypeScript config (runtime'da gerek yok)
-tsconfig*.json
+# TypeScript config files are needed for build
+# tsconfig*.json
 
-# Vite config (build sırasında kullanılır)
-vite.config.ts
-vite.config.js 
+# Vite config files are needed for build  
+# vite.config.ts
+# vite.config.js 

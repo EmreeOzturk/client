@@ -2,11 +2,16 @@ FROM node:20 AS build
 
 WORKDIR /app
 
+# Copy package files
 COPY package*.json pnpm-lock.yaml* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
+# Install pnpm and dependencies
+RUN npm install -g pnpm && pnpm install
+
+# Copy all source files including TypeScript configs
 COPY . .
 
+# Build the application
 RUN pnpm run build
 
 FROM nginx:alpine
