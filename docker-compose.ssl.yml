@@ -26,7 +26,7 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=mongodb://admin:${MONGODB_PASSWORD}@mongodb:27017/wert_app?authSource=admin&directConnection=true
+      - DATABASE_URL=mongodb://admin:${MONGODB_PASSWORD}@mongodb:27017/wert_integration?authSource=admin&directConnection=true
       - PORT=3001
       - JWT_SECRET=${JWT_SECRET}
       - CORS_ORIGIN=https://${DOMAIN_NAME}

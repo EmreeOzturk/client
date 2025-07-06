@@ -16,7 +16,11 @@ RUN pnpm run build
 
 FROM nginx:alpine
 
+# Copy built app
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration for React Router
+COPY nginx-frontend.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
