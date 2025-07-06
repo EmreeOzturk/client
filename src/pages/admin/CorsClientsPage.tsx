@@ -17,6 +17,7 @@ const CorsClientsPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [newDomain, setNewDomain] = useState('');
+    const [scAddress, setScAddress] = useState('');
     const [isAdding, setIsAdding] = useState(false);
     const [validationError, setValidationError] = useState<string | null>(null);
     const [deleteModal, setDeleteModal] = useState<{
@@ -91,7 +92,7 @@ const CorsClientsPage = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ domain: newDomain.trim() }),
+                body: JSON.stringify({ domain: newDomain.trim(), scAddress }),
             });
 
             if (!response.ok) {
@@ -100,6 +101,7 @@ const CorsClientsPage = () => {
             }
 
             setNewDomain('');
+            setScAddress('');
             await fetchClients(); // Refresh the list
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Failed to add CORS client';
@@ -177,6 +179,17 @@ const CorsClientsPage = () => {
                         {validationError && (
                             <span className="error-message">{validationError}</span>
                         )}
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="scAddress">SC Address</label>
+                        <input
+                            id="scAddress"
+                            type="text"
+                            value={scAddress}
+                            onChange={(e) => { setScAddress(e.target.value) }}
+                            className={`domain-input`}
+                            disabled={isAdding}
+                        />
                     </div>
                     <button
                         onClick={handleAddClient}
