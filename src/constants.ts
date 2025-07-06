@@ -1,1 +1,1 @@
-export const BACKEND_URL="https://payment-gateway-dats.vercel.app"
+export const BACKEND_URL="https://checkout.dltpaymentssystems.com/"
