@@ -1,1 +1,1 @@
-export const BACKEND_URL="https://checkout.dltpaymentssystems.com"
+export const BACKEND_URL="https://checkout.dltpaymentssystems.com/"
