@@ -117,7 +117,6 @@ function PaymentPage() {
       <div className="company-info">
         <img src={Artboard6} alt="DLT Payments Logo" className="company-logo" />
         <p> DLT TECH LTD</p>
-        <p>Tirana, Tirana '' Brigada 8 '' Street , Building No:19 Entrance No: 3</p>
       </div>
       <div className="status-card">
         {error ? (
