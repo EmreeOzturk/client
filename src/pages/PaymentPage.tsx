@@ -60,7 +60,7 @@ function PaymentPage() {
         setStatus('Fetching payment details...')
         // prod url https://payment-gateway-dats.vercel.app/
         const devOrProd = process.env.NODE_ENV === 'production' ? BACKEND_URL: 'http://localhost:3000'
-        const response = await fetch(`${devOrProd}api/get-payment-data?token=${token}`)
+        const response = await fetch(`${devOrProd}/api/get-payment-data?token=${token}`)
 
         if (!response.ok) {
           const errorData = await response.json()
